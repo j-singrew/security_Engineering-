@@ -15,8 +15,13 @@ GUARGE agent properties:
 
 key = Fernet.generate_key()
 f = Fernet(key)
+
 nonce_history = []
 user_db = ("user#123124")
+
+"""
+nonce Generator ~ N
+"""
 
 def nonce_generator():
     return ''.join(
@@ -26,6 +31,9 @@ def nonce_generator():
 
     
 
+"""
+Simple verification
+"""
 def nonce_verification(nonce_value):
     if nonce_value not in nonce_history:
         nonce_history.append(nonce_value)
@@ -35,7 +43,7 @@ def nonce_verification(nonce_value):
 
 
 
-#T - encrypted T+N
+
 def gaurage(token):
 
     token = f.decrypt(token).decode()
@@ -55,8 +63,13 @@ def gaurage(token):
 
 
 
+"""
+T ~ Token 
+G ~name
+N ~ nonce
 
-    
+T -> G ∶ T, {T, N}KT
+"""
 
 def auth_agent():
     name = "user#123124"
